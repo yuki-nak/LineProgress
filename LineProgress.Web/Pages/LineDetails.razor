@@ -1,0 +1,106 @@
+﻿@page "/LineDetails/{lineName}"
+@using LineProgress.Entities
+@using LineProgress.Services
+@using System.Timers
+@implements IDisposable
+@inject LineService lineService
+<h1 id="lineName">@LineName</h1>
+<table class="progress-table">
+    <colgroup>
+        <col style="width: 50%;" />
+        <col style="width: 50%;" />
+    </colgroup>
+    <tbody>
+        <tr>
+            <th>Daily Progress</th>
+            <th>Monthly Progress</th>
+        </tr>
+        <tr>
+            <td>
+                <p>Plan: @selectedLine.DailyPlan</p>
+                <p>Actual: @selectedLine.DailyActual</p>
+            </td>
+            <td>
+                <p>Plan: @selectedLine.MonthlyPlan</p>
+                <p>Actual: @selectedLine.MonthlyActual</p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Difference: @selectedLine.DailyDifference</p>
+            </td>
+            <td>
+                <p>Difference: @selectedLine.MonthlyDifference</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+@code {
+    Line selectedLine;
+    Timer timer;
+    [Parameter]
+    public string LineName { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateData();
+        //selectedLine = await lineService.GetLineByName(LineName);
+        // タイマーを初期化して1分ごとにデータを更新
+        timer = new Timer(10000);
+        timer.Elapsed += async (sender, e) => await UpdateData();
+        timer.AutoReset = true;
+        timer.Enabled = true;
+    }
+    private async Task UpdateData()
+    {
+        try
+        {
+            await InvokeAsync(async () =>
+            {
+                selectedLine = await lineService.GetLineByName(LineName);
+                StateHasChanged();
+            });
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred while updating data: {ex.Message}");
+        }
+    }
+    public void Dispose()
+    {
+        timer.Dispose();
+    }
+}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: black;
+        color: white;
+        font-size: 64px;
+    }
+    #lineName {
+        text-align: center;
+        font-size: 72px;
+    }
+    .progress-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+        .progress-table th,
+        .progress-table td {
+            border: 1px solid white; /* 枠線を白に設定 */
+            text-align: center;
+            padding: 8px;
+        }
+        .progress-table th {
+            background-color: #000; /* ヘッダーの背景色を変更 */
+            font-size: 72px;
+        }
+        .progress-table tbody tr:nth-child(even) td {
+            background-color: #000; /* 偶数行の背景色を変更 */
+        }
+        .progress-table tbody tr:nth-child(odd) td {
+            background-color: #000; /* 奇数行の背景色を変更 */
+        }
+</style>
