@@ -1,9 +1,32 @@
 ﻿@page "/"
-
-<PageTitle>Index</PageTitle>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
-
-<SurveyPrompt Title="How is Blazor working for you?" />
+@using LineProgress.Services
+@inject LineService lineService
+@inject NavigationManager navigationManager
+<h3>Select a Line:</h3>
+<select @onchange="OnLineSelected">
+    <option value="">Select Line</option>
+    @foreach (var line in Model.Lines)
+    {
+        <option value="@line.LineName">@line.LineName</option>
+    }
+</select>
+@code {
+    LineViewModel Model { get; set; } = new LineViewModel();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        Model.Lines = (await lineService.GetAllLinesAsync()).ToList();
+    }
+    private async Task OnLineSelected(ChangeEventArgs e)
+    {
+        Model.SelectedLineName = e.Value.ToString();
+        if (!string.IsNullOrEmpty(Model.SelectedLineName))
+        {
+            var lineDetail = await lineService.GetLineByNameAsync(Model.SelectedLineName);
+            if (lineDetail != null)
+            {
+                navigationManager.NavigateTo($"/linedetails/{Model.SelectedLineName}");
+            }
+        }
+    }
+}

@@ -56,7 +56,7 @@
         {
             await InvokeAsync(async () =>
             {
-                selectedLine = await lineService.GetLineByName(LineName);
+                selectedLine = await lineService.GetLineByNameAsync(LineName);
                 StateHasChanged();
             });
         }

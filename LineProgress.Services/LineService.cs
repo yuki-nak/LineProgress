@@ -9,11 +9,11 @@ namespace LineProgress.Services
         {
             _oracleLineRepository = oracleLineRepository;
         }
-        public async Task<IEnumerable<Line>> GetAllLines()
+        public async Task<IEnumerable<Line>> GetAllLinesAsync()
         {
             return await _oracleLineRepository.GetAllLinesAsync();
         }
-        public async Task<Line> GetLineByName(string lineName)
+        public async Task<Line> GetLineByNameAsync(string lineName)
         {
             return await _oracleLineRepository.GetLineByNameAsync(lineName);
         }
