@@ -13,7 +13,14 @@ builder.Services.AddSingleton<WeatherForecastService>();
 
 //Add manually
 builder.Services.AddTransient<LineService, LineService>();
-builder.Services.AddTransient<IOracleLineRepository, OracleLineRepository>();
+
+// for database
+//builder.Services.AddTransient<IOracleLineRepository, OracleLineRepository>();
+
+//for csv
+var csvFilePath = @"C:\example\data.csv";
+builder.Services.AddTransient<IOracleLineRepository>(_ => new CsvLineRepository(csvFilePath));
+
 
 var app = builder.Build();
 
