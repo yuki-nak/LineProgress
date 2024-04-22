@@ -363,3 +363,5 @@ MigrationBackup/
 FodyWeavers.xsd
 /LineProgress.Web/appsettings.json
 /LineProgress.Web/appsettings.Development.json
+/LineProgress.Web/appsettings.json
+/LineProgress.Web/appsettings.Development.json
