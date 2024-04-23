@@ -12,7 +12,8 @@
 </select>
 @code {
     LineViewModel Model { get; set; } = new LineViewModel();
-    
+  
+
     protected override async Task OnInitializedAsync()
     {
         Model.Lines = (await lineService.GetAllLinesAsync()).ToList();
@@ -22,9 +23,10 @@
         Model.SelectedLineName = e.Value.ToString();
         if (!string.IsNullOrEmpty(Model.SelectedLineName))
         {
-            var lineDetail = await lineService.GetLineByNameAsync(Model.SelectedLineName);
-            if (lineDetail != null)
+            Model.SelectedLine = await lineService.GetLineByNameAsync(Model.SelectedLineName);
+            if (Model.SelectedLine != null)
             {
+              
                 navigationManager.NavigateTo($"/linedetails/{Model.SelectedLineName}");
             }
         }

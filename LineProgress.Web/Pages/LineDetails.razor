@@ -5,36 +5,44 @@
 @implements IDisposable
 @inject LineService lineService
 <h1 id="lineName">@LineName</h1>
-<table class="progress-table">
-    <colgroup>
-        <col style="width: 50%;" />
-        <col style="width: 50%;" />
-    </colgroup>
-    <tbody>
-        <tr>
-            <th>Daily Progress</th>
-            <th>Monthly Progress</th>
-        </tr>
-        <tr>
-            <td>
-                <p>Plan: @selectedLine.DailyPlan</p>
-                <p>Actual: @selectedLine.DailyActual</p>
-            </td>
-            <td>
-                <p>Plan: @selectedLine.MonthlyPlan</p>
-                <p>Actual: @selectedLine.MonthlyActual</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Difference: @selectedLine.DailyDifference</p>
-            </td>
-            <td>
-                <p>Difference: @selectedLine.MonthlyDifference</p>
-            </td>
-        </tr>
-    </tbody>
-</table>
+
+@if (selectedLine != null)
+{
+    <table class="progress-table">
+        <colgroup>
+            <col style="width: 50%;" />
+            <col style="width: 50%;" />
+        </colgroup>
+        <tbody>
+            <tr>
+                <th>Daily Progress</th>
+                <th>Monthly Progress</th>
+            </tr>
+            <tr>
+                <td>
+                    <p>Plan: @selectedLine.DailyPlan</p>
+                    <p>Actual: @selectedLine.DailyActual</p>
+                </td>
+                <td>
+                    <p>Plan: @selectedLine.MonthlyPlan</p>
+                    <p>Actual: @selectedLine.MonthlyActual</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Difference: @selectedLine.DailyDifference</p>
+                </td>
+                <td>
+                    <p>Difference: @selectedLine.MonthlyDifference</p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Line Not found</p>
+}
 @code {
     Line selectedLine;
     Timer timer;
@@ -76,11 +84,11 @@
         padding: 0;
         background-color: black;
         color: white;
-        font-size: 64px;
+        font-size: 86px;
     }
     #lineName {
         text-align: center;
-        font-size: 72px;
+        font-size: 92px;
     }
     .progress-table {
         width: 100%;
@@ -95,7 +103,7 @@
         }
         .progress-table th {
             background-color: #000; /* ヘッダーの背景色を変更 */
-            font-size: 72px;
+            font-size: 92px;
         }
         .progress-table tbody tr:nth-child(even) td {
             background-color: #000; /* 偶数行の背景色を変更 */
