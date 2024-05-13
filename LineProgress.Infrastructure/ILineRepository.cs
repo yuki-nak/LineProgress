@@ -2,7 +2,7 @@
 
 namespace LineProgress.Infrastructure
 {
-    public interface IOracleLineRepository
+    public interface ILineRepository
     {
         Task<IEnumerable<Line>> GetAllLinesAsync();
         Task<Line> GetLineByNameAsync(string lineName);

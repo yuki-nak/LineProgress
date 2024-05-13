@@ -6,7 +6,7 @@ using System.Globalization;
 
 namespace LineProgress.Infrastructure
 {
-    public class CsvLineRepository : IOracleLineRepository
+    public class CsvLineRepository : ILineRepository
     {
         private readonly string _csvFilePath;
 
@@ -45,7 +45,7 @@ namespace LineProgress.Infrastructure
             Map(m => m.DailyPlan).Name("PLAN");
             Map(m => m.DailyActual).Name("ACTUAL");
             Map(m => m.MonthlyPlan).Name("PLAN_M");
-            Map(m => m.MonthlyActual).Name("PLAN_A");
+            Map(m => m.MonthlyActual).Name("ACTUAL_M");
         }
     }
 }

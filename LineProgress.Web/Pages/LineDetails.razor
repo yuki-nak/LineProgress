@@ -20,20 +20,20 @@
             </tr>
             <tr>
                 <td>
-                    <p>Plan: @selectedLine.DailyPlan</p>
-                    <p>Actual: @selectedLine.DailyActual</p>
+                    <p><span class="label">Plan:</span> <span class="number">@selectedLine.DailyPlan.ToString("N0")</span></p>
+                    <p><span class="label">Actual:</span> <span class="number">@selectedLine.DailyActual.ToString("N0")</span></p>
                 </td>
                 <td>
-                    <p>Plan: @selectedLine.MonthlyPlan</p>
-                    <p>Actual: @selectedLine.MonthlyActual</p>
+                    <p><span class="label">Plan:</span> <span class="number">@selectedLine.MonthlyPlan.ToString("N0")</span></p>
+                    <p><span class="label">Actual:</span> <span class="number">@selectedLine.MonthlyActual.ToString("N0")</span></p>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <p>Difference: @selectedLine.DailyDifference</p>
+                    <p>Difference: <span class="number">@selectedLine.DailyDifference.ToString("N0")</span></p>
                 </td>
                 <td>
-                    <p>Difference: @selectedLine.MonthlyDifference</p>
+                    <p>Difference: <span class="number">@selectedLine.MonthlyDifference.ToString("N0")</span></p>
                 </td>
             </tr>
         </tbody>
@@ -110,5 +110,14 @@ else
         }
         .progress-table tbody tr:nth-child(odd) td {
             background-color: #000; /* 奇数行の背景色を変更 */
+        }
+
+        .number {
+            text-align: right; /* 数字を右寄せにする */
+        }
+
+        .label {
+            text-align: left; /* ラベルのテキストを左寄せにする */
+            margin-right: 10px; /* ラベルと数字の間に余白を設定する */
         }
 </style>

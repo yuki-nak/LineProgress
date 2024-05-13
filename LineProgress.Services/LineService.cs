@@ -4,8 +4,8 @@ namespace LineProgress.Services
 {
     public class LineService
     {
-        private readonly IOracleLineRepository _oracleLineRepository;
-        public LineService(IOracleLineRepository oracleLineRepository)
+        private readonly ILineRepository _oracleLineRepository;
+        public LineService(ILineRepository oracleLineRepository)
         {
             _oracleLineRepository = oracleLineRepository;
         }

@@ -19,7 +19,7 @@ builder.Services.AddTransient<LineService, LineService>();
 
 //for csv
 var csvFilePath = @"C:\Users\public\data.csv";
-builder.Services.AddTransient<IOracleLineRepository>(_ => new CsvLineRepository(csvFilePath));
+builder.Services.AddTransient<ILineRepository>(_ => new CsvLineRepository(csvFilePath));
 
 
 var app = builder.Build();

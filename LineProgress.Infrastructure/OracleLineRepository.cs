@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Oracle.ManagedDataAccess.Client;
 namespace LineProgress.Infrastructure
 {
-    public class OracleLineRepository : IOracleLineRepository
+    public class OracleLineRepository : ILineRepository
     {
         private readonly string _connectionString;
         public OracleLineRepository(IConfiguration configuration)
